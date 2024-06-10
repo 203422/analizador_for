@@ -1,0 +1,99 @@
+:root {
+    --font: "Raleway", sans-serif;
+    --purple: #5C5470;
+    --black: #222831;
+    --purpleBlack: #7d768d;
+    --lightPurple: #B9B4C7;
+    --white: #ffffff;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 62.5%;
+}
+
+body {
+    font-family: var(--font);
+    font-size: 1.6rem;
+    margin: 0;
+    padding: 0;
+}
+
+p {
+    margin: 0;
+}
+
+.container {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 120rem;
+    width: 90%;
+}
+
+h1 {
+    color: var(--purple);
+    font-size: 3rem;
+    margin-bottom: 2rem;
+}
+
+h2 {
+    color: var(--black);
+    font-size: 2rem;
+    margin-top: 3rem;
+}
+
+button {
+    background-color: var(--purple);
+    color: var(--white);
+    border: none;
+    padding: 1rem 2rem;
+    font-size: 1.6rem;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: var(--purpleBlack);
+}
+
+textarea {
+    width: 100%;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border: 1px solid var(--lightPurple);
+    border-radius: 5px;
+    resize: vertical;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 2rem;
+}
+
+th, td {
+    padding: 1rem;
+    text-align: center;
+    border: 1px solid var(--lightPurple);
+}
+
+th {
+    background-color: var(--purpleBlack);
+    color: var(--white);
+}
+
+tbody tr:nth-child(even) {
+    background-color: var(--lightPurple);
+}
+
+ul {
+    list-style-type: none;
+    margin-top: 2rem;
+}
+
+ul li {
+    margin-bottom: 1rem;
+}
+
