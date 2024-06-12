@@ -16,51 +16,60 @@
             <br>
             <button type="submit">Analizar código</button>
         </form>
-        <h2>Análisis Léxico:</h2>
-        <table class="table table-bordered">
-            <thead>
-                <tr>
-                    <th>Tokens</th>
-                    <th>PR</th>
-                    <th>ID</th>
-                    <th>Números</th>
-                    <th>Símbolos</th>
-                    <th>Error</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for token, count in token_count.items() %}
-                <tr>
-                    <td></td>
-                    <td>{% if 'PR' in token %}x {% endif %}</td>
-                    <td>{% if 'ID' in token %} x {% endif %}</td>
-                    <td>{% if 'NUM' in token %}x{% endif %}</td>
-                    <td>{% if 'SYM' in token %} x{% endif %}</td>
-                    <td>{% if 'ERR' in token %}{% endif %}</td>
-                </tr>
-                {% endfor %}
-                <tr>
-                    <td>Total</td>
-                    <td>{{ token_count['PR'] }}</td>
-                    <td>{{ token_count['ID'] }}</td>
-                    <td>{{ token_count['NUM'] }}</td>
-                    <td>{{ token_count['SYM'] }}</td>
-                    <td>{{ token_count['ERR'] }}</td>
-                </tr>
-            </tbody>
-        </table>
+        <div class="results">
+            <div class="result_lex">
+                <h2>Análisis Léxico:</h2>
 
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Tokens</th>
+                            <th>PR</th>
+                            <th>ID</th>
+                            <th>Números</th>
+                            <th>Símbolos</th>
+                            <th>Error</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% set unique_tokens = [] %}
+                        {% for token in for_loop_tokens %}
+                        {% set unique_tokens = unique_tokens + [token] %}
+                        <tr>
+                            <td>{{ token[0] }}</td>
+                            <td>{% if token[1] == 'FOR' or token[1] == 'INT' %} X {% endif %}</td>
+                            <td>{% if token[1] == 'ID' %} X {% endif %}</td>
+                            <td>{% if token[1] == 'NUMBER' %} X {% endif %}</td>
+                            <td>{% if token[1] not in ['FOR', 'INT', 'ID', 'NUMBER'] %} X {% endif %}</td>
+                            <td>{% if token[1] == 'ERR' %} X {% endif %}</td>
+                        </tr>
+                        {% endfor %}
+                        <tr>
+                            <td><strong>Total</strong></td>
+                            <td>{{ token_count['PR'] }}</td>
+                            <td>{{ token_count['ID'] }}</td>
+                            <td>{{ token_count['NUM'] }}</td>
+                            <td>{{ token_count['SYM'] }}</td>
+                            <td>{{ token_count['ERR'] }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
 
-        {% if errors %}
-        <h2>Análisis Sintáctico y Semántico</h2>
-        <ul>
-            {% for error in errors %}
-            <li>{{ error }}</li>
-            {% endfor %}
-        </ul>
-        {% endif %}
+            <div class="result_sem">
+                <h2>Análisis Sintáctico y Semántico</h2>
+                {% if errors %}
+                <ul>
+                    {% for error in errors %}
+                    <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+            </div>
+        </div>
     </main>
 
 </body>
+
 
 </html>

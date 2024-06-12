@@ -6,9 +6,9 @@ _tabversion = '3.10'
 
 _lr_method = 'LALR'
 
-_lr_signature = 'ASSIGN DOT FOR ID INCREMENT INT LBRACE LESSTHANOREQUAL LPAREN NUMBER RBRACE RPAREN SEMICOLON STRING\n    for_loop : FOR LPAREN INT ID ASSIGN NUMBER SEMICOLON ID LESSTHANOREQUAL NUMBER SEMICOLON ID INCREMENT RPAREN LBRACE system_out RBRACE\n    \n    system_out : ID DOT ID DOT ID LPAREN STRING RPAREN SEMICOLON\n    '
+_lr_signature = 'ASSIGN DOT FOR GREATERTHAN ID INCREMENT INT LBRACE LESSTHAN LESSTHANOREQUAL LPAREN NUMBER PLUS RBRACE RPAREN SEMICOLON STRING\n    for_loop : variable_declaration for_loop_inner_declaration\n             | p_variable_variation for_loop_inner_variation \n             | for_loop_inner\n    \n    p_variable_variation : INT ID SEMICOLON\n    \n    variable_declaration : INT ID ASSIGN NUMBER SEMICOLON\n    \n    for_loop_inner_variation : FOR LPAREN ID ASSIGN NUMBER SEMICOLON ID LESSTHAN NUMBER SEMICOLON ID INCREMENT RPAREN LBRACE system_out RBRACE\n                              | FOR LPAREN ID ASSIGN NUMBER SEMICOLON ID GREATERTHAN NUMBER SEMICOLON ID INCREMENT RPAREN LBRACE system_out RBRACE\n                              | FOR LPAREN ID ASSIGN NUMBER SEMICOLON ID LESSTHANOREQUAL NUMBER SEMICOLON ID INCREMENT RPAREN LBRACE system_out RBRACE\n    \n    for_loop_inner_declaration : FOR LPAREN ID SEMICOLON ID LESSTHAN NUMBER SEMICOLON ID INCREMENT RPAREN LBRACE system_out RBRACE\n                                | FOR LPAREN ID SEMICOLON ID GREATERTHAN NUMBER SEMICOLON ID INCREMENT RPAREN LBRACE system_out RBRACE\n                                | FOR LPAREN ID SEMICOLON ID LESSTHANOREQUAL NUMBER SEMICOLON ID INCREMENT RPAREN LBRACE system_out RBRACE\n    \n    for_loop_inner : FOR LPAREN INT ID ASSIGN NUMBER SEMICOLON ID LESSTHAN NUMBER SEMICOLON ID INCREMENT RPAREN LBRACE system_out RBRACE\n                    | FOR LPAREN INT ID ASSIGN NUMBER SEMICOLON ID GREATERTHAN NUMBER SEMICOLON ID INCREMENT RPAREN LBRACE system_out RBRACE\n                    | FOR LPAREN INT ID ASSIGN NUMBER SEMICOLON ID LESSTHANOREQUAL NUMBER SEMICOLON ID INCREMENT RPAREN LBRACE system_out RBRACE\n    \n    system_out_content : STRING\n                       | ID\n                       | system_out_content PLUS STRING\n                       | system_out_content PLUS ID\n    \n    system_out : ID DOT ID DOT ID LPAREN system_out_content RPAREN SEMICOLON\n    '
     
-_lr_action_items = {'FOR':([0,],[2,]),'$end':([1,20,],[0,-1,]),'LPAREN':([2,23,],[3,24,]),'INT':([3,],[4,]),'ID':([4,8,12,16,19,22,],[5,9,13,17,21,23,]),'ASSIGN':([5,],[6,]),'NUMBER':([6,10,],[7,11,]),'SEMICOLON':([7,11,26,],[8,12,27,]),'LESSTHANOREQUAL':([9,],[10,]),'INCREMENT':([13,],[14,]),'RPAREN':([14,25,],[15,26,]),'LBRACE':([15,],[16,]),'DOT':([17,21,],[19,22,]),'RBRACE':([18,27,],[20,-2,]),'STRING':([24,],[25,]),}
+_lr_action_items = {'INT':([0,12,],[5,17,]),'FOR':([0,2,3,16,24,],[6,8,10,-4,-5,]),'$end':([1,4,7,9,95,96,97,112,113,114,115,116,117,],[0,-3,-1,-2,-9,-10,-11,-6,-7,-8,-12,-13,-14,]),'ID':([5,13,14,17,22,32,33,39,40,41,60,61,62,63,64,65,75,76,77,94,98,99,100,101,102,103,111,119,124,],[11,18,19,21,26,37,38,48,49,50,69,70,71,72,73,74,84,84,84,104,84,84,84,84,84,84,118,120,127,]),'LPAREN':([6,8,10,118,],[12,13,14,119,]),'ASSIGN':([11,19,21,],[15,23,25,]),'SEMICOLON':([11,18,20,27,28,34,35,36,51,52,53,54,55,56,123,],[16,22,24,32,33,39,40,41,60,61,62,63,64,65,125,]),'NUMBER':([15,23,25,29,30,31,42,43,44,45,46,47,],[20,27,28,34,35,36,51,52,53,54,55,56,]),'LESSTHAN':([26,37,38,],[29,42,45,]),'GREATERTHAN':([26,37,38,],[30,43,46,]),'LESSTHANOREQUAL':([26,37,38,],[31,44,47,]),'INCREMENT':([48,49,50,69,70,71,72,73,74,],[57,58,59,78,79,80,81,82,83,]),'RPAREN':([57,58,59,78,79,80,81,82,83,120,121,122,126,127,],[66,67,68,88,89,90,91,92,93,-16,123,-15,-17,-18,]),'LBRACE':([66,67,68,88,89,90,91,92,93,],[75,76,77,98,99,100,101,102,103,]),'DOT':([84,104,],[94,111,]),'RBRACE':([85,86,87,105,106,107,108,109,110,125,],[95,96,97,112,113,114,115,116,117,-19,]),'STRING':([119,124,],[122,126,]),'PLUS':([120,121,122,126,127,],[-16,124,-15,-17,-18,]),}
 
 _lr_action = {}
 for _k, _v in _lr_action_items.items():
@@ -17,7 +17,7 @@ for _k, _v in _lr_action_items.items():
       _lr_action[_x][_k] = _y
 del _lr_action_items
 
-_lr_goto_items = {'for_loop':([0,],[1,]),'system_out':([16,],[18,]),}
+_lr_goto_items = {'for_loop':([0,],[1,]),'variable_declaration':([0,],[2,]),'p_variable_variation':([0,],[3,]),'for_loop_inner':([0,],[4,]),'for_loop_inner_declaration':([2,],[7,]),'for_loop_inner_variation':([3,],[9,]),'system_out':([75,76,77,98,99,100,101,102,103,],[85,86,87,105,106,107,108,109,110,]),'system_out_content':([119,],[121,]),}
 
 _lr_goto = {}
 for _k, _v in _lr_goto_items.items():
@@ -27,6 +27,23 @@ for _k, _v in _lr_goto_items.items():
 del _lr_goto_items
 _lr_productions = [
   ("S' -> for_loop","S'",1,None,None,None),
-  ('for_loop -> FOR LPAREN INT ID ASSIGN NUMBER SEMICOLON ID LESSTHANOREQUAL NUMBER SEMICOLON ID INCREMENT RPAREN LBRACE system_out RBRACE','for_loop',17,'p_for_loop','app.py',75),
-  ('system_out -> ID DOT ID DOT ID LPAREN STRING RPAREN SEMICOLON','system_out',9,'p_system_out','app.py',85),
+  ('for_loop -> variable_declaration for_loop_inner_declaration','for_loop',2,'p_for_loop','app.py',76),
+  ('for_loop -> p_variable_variation for_loop_inner_variation','for_loop',2,'p_for_loop','app.py',77),
+  ('for_loop -> for_loop_inner','for_loop',1,'p_for_loop','app.py',78),
+  ('p_variable_variation -> INT ID SEMICOLON','p_variable_variation',3,'p_variable_variation','app.py',86),
+  ('variable_declaration -> INT ID ASSIGN NUMBER SEMICOLON','variable_declaration',5,'p_variable_declaration','app.py',93),
+  ('for_loop_inner_variation -> FOR LPAREN ID ASSIGN NUMBER SEMICOLON ID LESSTHAN NUMBER SEMICOLON ID INCREMENT RPAREN LBRACE system_out RBRACE','for_loop_inner_variation',16,'p_for_loop_inner_variation','app.py',100),
+  ('for_loop_inner_variation -> FOR LPAREN ID ASSIGN NUMBER SEMICOLON ID GREATERTHAN NUMBER SEMICOLON ID INCREMENT RPAREN LBRACE system_out RBRACE','for_loop_inner_variation',16,'p_for_loop_inner_variation','app.py',101),
+  ('for_loop_inner_variation -> FOR LPAREN ID ASSIGN NUMBER SEMICOLON ID LESSTHANOREQUAL NUMBER SEMICOLON ID INCREMENT RPAREN LBRACE system_out RBRACE','for_loop_inner_variation',16,'p_for_loop_inner_variation','app.py',102),
+  ('for_loop_inner_declaration -> FOR LPAREN ID SEMICOLON ID LESSTHAN NUMBER SEMICOLON ID INCREMENT RPAREN LBRACE system_out RBRACE','for_loop_inner_declaration',14,'p_for_loop_inner_declaration','app.py',114),
+  ('for_loop_inner_declaration -> FOR LPAREN ID SEMICOLON ID GREATERTHAN NUMBER SEMICOLON ID INCREMENT RPAREN LBRACE system_out RBRACE','for_loop_inner_declaration',14,'p_for_loop_inner_declaration','app.py',115),
+  ('for_loop_inner_declaration -> FOR LPAREN ID SEMICOLON ID LESSTHANOREQUAL NUMBER SEMICOLON ID INCREMENT RPAREN LBRACE system_out RBRACE','for_loop_inner_declaration',14,'p_for_loop_inner_declaration','app.py',116),
+  ('for_loop_inner -> FOR LPAREN INT ID ASSIGN NUMBER SEMICOLON ID LESSTHAN NUMBER SEMICOLON ID INCREMENT RPAREN LBRACE system_out RBRACE','for_loop_inner',17,'p_for_loop_inner','app.py',127),
+  ('for_loop_inner -> FOR LPAREN INT ID ASSIGN NUMBER SEMICOLON ID GREATERTHAN NUMBER SEMICOLON ID INCREMENT RPAREN LBRACE system_out RBRACE','for_loop_inner',17,'p_for_loop_inner','app.py',128),
+  ('for_loop_inner -> FOR LPAREN INT ID ASSIGN NUMBER SEMICOLON ID LESSTHANOREQUAL NUMBER SEMICOLON ID INCREMENT RPAREN LBRACE system_out RBRACE','for_loop_inner',17,'p_for_loop_inner','app.py',129),
+  ('system_out_content -> STRING','system_out_content',1,'p_system_out_content','app.py',140),
+  ('system_out_content -> ID','system_out_content',1,'p_system_out_content','app.py',141),
+  ('system_out_content -> system_out_content PLUS STRING','system_out_content',3,'p_system_out_content','app.py',142),
+  ('system_out_content -> system_out_content PLUS ID','system_out_content',3,'p_system_out_content','app.py',143),
+  ('system_out -> ID DOT ID DOT ID LPAREN system_out_content RPAREN SEMICOLON','system_out',9,'p_system_out','app.py',153),
 ]
